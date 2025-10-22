@@ -3,5 +3,6 @@ members = [
     "bb8",
     "postgres",
     "redis",
+    "clickhouse",
 ]
 resolver = "2"

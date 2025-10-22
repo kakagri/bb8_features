@@ -1,0 +1,31 @@
+[package]
+name = "bb8-clickhouse"
+version = "0.1.0"
+edition = "2021"
+rust-version = "1.75"
+description = "Full-featured async (tokio-based) ClickHouse connection pool"
+license = "MIT"
+repository = "https://github.com/djc/bb8"
+readme = "README.md"
+
+[dependencies]
+bb8 = { version = "0.9", path = "../bb8" }
+clickhouse = { version = "0.14", path = "../../clickhouse-rs", default-features = false }
+tokio = { version = "1.0", features = ["rt"] }
+
+[dev-dependencies]
+tokio = { version = "1.0", features = ["macros", "rt-multi-thread", "time"] }
+serde = { version = "1.0", features = ["derive"] }
+futures-util = "0.3"
+
+[features]
+default = ["lz4"]
+lz4 = ["clickhouse/lz4"]
+
+# TLS support - choose one
+native-tls = ["clickhouse/native-tls"]
+rustls-tls = ["clickhouse/rustls-tls"]
+rustls-tls-aws-lc = ["clickhouse/rustls-tls-aws-lc"]
+rustls-tls-ring = ["clickhouse/rustls-tls-ring"]
+rustls-tls-webpki-roots = ["clickhouse/rustls-tls-webpki-roots"]
+rustls-tls-native-roots = ["clickhouse/rustls-tls-native-roots"]
